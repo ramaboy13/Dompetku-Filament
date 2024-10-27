@@ -15,7 +15,7 @@ class transaction extends Model
         'amount',
         'description',
         'image',
-        'date',
+        'date_transaction',
     ];
 
     public function category()
@@ -34,7 +34,7 @@ class transaction extends Model
         return $query
             ->where('user_id', Auth::id())  // Tambahkan filter user_id
             ->whereHas('category', function ($query) {
-                $query->where('pengeluaran', false);
+                $query->where('pengeluaran', true);
             });
     }
 
@@ -43,7 +43,7 @@ class transaction extends Model
         return $query
             ->where('user_id', Auth::id())  // Tambahkan filter user_id
             ->whereHas('category', function ($query) {
-                $query->where('pengeluaran', true);
+                $query->where('pengeluaran', false);
             });
     }
 }
