@@ -22,6 +22,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->favicon(asset('img/logo.png'))
             ->default()
             ->id('admin')
             ->path('admin')
