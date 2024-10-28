@@ -1,0 +1,55 @@
+// Users table
+Table users {
+  id integer [primary key]
+  name varchar
+  email varchar [unique]
+  email_verified_at timestamp [note: 'Nullable']
+  password varchar
+  remember_token varchar [note: 'Token for remembering login']
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Banks table
+Table banks {
+  id integer [primary key]
+  name varchar
+  bank varchar
+  norek varchar
+  image varchar
+  user_id integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Categories table
+Table categories {
+  id integer [primary key]
+  name varchar
+  user_id integer
+  pengeluaran boolean [default: true, note: 'True if expense category']
+  image varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Transactions table
+Table transactions {
+  id integer [primary key]
+  category_id integer
+  user_id integer
+  bank_id integer
+  date date
+  amount integer
+  description varchar [note: 'Optional description']
+  image varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Relations
+Ref: banks.user_id > users.id
+Ref: categories.user_id > users.id
+Ref: transactions.user_id > users.id
+Ref: transactions.category_id > categories.id
+Ref: transactions.bank_id > banks.id

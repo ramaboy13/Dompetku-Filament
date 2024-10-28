@@ -27,6 +27,9 @@ class TransactionResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
+                Forms\Components\Select::make('bank_id')
+                    ->relationship('bank', 'bank')
+                    ->required(),
                 Forms\Components\Hidden::make('user_id')
                     ->default(fn() => Auth::id())
                     ->required(),
@@ -41,6 +44,7 @@ class TransactionResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
+                    ->label('Struk Transactions')
                     ->image()
                     ->required(),
             ]);
@@ -61,11 +65,11 @@ class TransactionResource extends Resource
                 Tables\Columns\ImageColumn::make('category.image')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
-                    // ->label('Kategori')
+                    ->label('Name')
                     ->description(fn(transaction $record): string => $record->name)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('category.pengeluaran')
-                    ->label('Tipe Transaksi')
+                    ->label('Transaction Type')
                     ->trueIcon('heroicon-o-arrow-up-circle')
                     ->falseIcon('heroicon-o-arrow-down-circle')
                     ->trueColor('danger')
@@ -75,6 +79,8 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('date_transaction')
                     ->date()
                     ->sortable(),
+                Tables\Columns\ImageColumn::make('bank.image')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
@@ -94,6 +100,7 @@ class TransactionResource extends Resource
                 // Tambahkan filter jika diperlukan
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

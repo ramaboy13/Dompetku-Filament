@@ -22,6 +22,10 @@ class transaction extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
     protected static function booted()
     {
         static::saving(function ($transaction) {
