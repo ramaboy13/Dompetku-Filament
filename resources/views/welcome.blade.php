@@ -21,7 +21,7 @@
                 <a href="#features">Fitur</a>
                 <a href="#demo">Demo</a>
                 <a href="#pricing">Harga</a>
-                <a href="#contact">Kontak</a>
+                <a href="https://www.instagram.com/ramaboy_13/">Kontak</a>
             </div>
         </nav>
     </header>

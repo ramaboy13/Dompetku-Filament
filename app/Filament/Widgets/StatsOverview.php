@@ -32,7 +32,7 @@ class StatsOverview extends BaseWidget
         return [
             Stat::make('Pemasukan', $pemasukan),
             Stat::make('Pengeluaran', $pengeluaran),
-            Stat::make('Total', $pemasukan - $pengeluaran),
+            Stat::make('Selisih', $pemasukan - $pengeluaran),
         ];
     }
 }

@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Models\Category;
+use App\Filament\Resources\MybioResource\Pages;
+use App\Filament\Resources\MybioResource\RelationManagers;
+use App\Models\Mybio;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,25 +14,26 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryResource extends Resource
+class MyBioResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = Mybio::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Hidden::make('user_id')
-                    ->default(fn() => Auth::id())
+                    ->default(fn() => Auth::id()),
+                Forms\Components\DatePicker::make('birth')
                     ->required(),
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('gender')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('pengeluaran')
-                    ->label('Apakah Pengeluaran?')
-                    ->required(),
+                Forms\Components\TextInput::make('address')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required(),
@@ -42,25 +45,22 @@ class CategoryResource extends Resource
         return $table
             ->query(function (Builder $query) {
                 if (Auth::check()) {
-                    return Category::query()->where('user_id', Auth::id());
+                    return Mybio::query()->where('user_id', Auth::id());
                 }
-                return Category::query();  // Selalu kembalikan instance Query Builder
+                return Mybio::query();  // Selalu kembalikan instance Query Builder
             })
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('user.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('birth')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('gender')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('pengeluaran')
-                    ->trueIcon('heroicon-o-arrow-up-circle')
-                    ->falseIcon('heroicon-o-arrow-down-circle')
-                    ->trueColor('danger')
-                    ->falseColor('success')
-                    ->boolean(),
-                Tables\Columns\ImageColumn::make('image')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('address')
+                //     ->searchable(),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -74,7 +74,9 @@ class CategoryResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -93,9 +95,11 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListMybios::route('/'),
+            'create' => Pages\CreateMybio::route('/create'),
+            'edit' => Pages\EditMybio::route('/{record}/edit'),
         ];
     }
+
+
 }
