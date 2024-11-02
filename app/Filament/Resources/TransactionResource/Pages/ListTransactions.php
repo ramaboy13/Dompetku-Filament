@@ -14,6 +14,7 @@ class ListTransactions extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\ExportAction::make()->url(fn() => route('download.test'))->openUrlInNewTab(),
         ];
     }
 }

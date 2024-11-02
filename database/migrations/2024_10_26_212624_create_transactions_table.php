@@ -14,8 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('bank_id')->nullable()->constrained('banks')->onDelete('set null');
             $table->string('name');
-            $table->date('date');
+            $table->date('date_transaction');
             $table->integer('amount');
             $table->string('description')->nullable();
             $table->string('image');

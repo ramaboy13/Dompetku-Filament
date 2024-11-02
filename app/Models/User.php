@@ -47,6 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
 
     /**
      * Get the user's bio information.

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TransactionResource\Pages;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Models\Tag; // Tambahkan ini untuk akses Tag model
 use Filament\Forms;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Form;
@@ -12,7 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-
 
 class TransactionResource extends Resource
 {
@@ -47,26 +47,29 @@ class TransactionResource extends Resource
                     ->label('Struk Transactions')
                     ->image()
                     ->required(),
+                Forms\Components\Select::make('tags') // Komponen untuk Tags
+                    ->label('Tags')
+                    ->multiple() // memungkinkan memilih banyak tag
+                    ->relationship('tags', 'name') // relasi ke tags
+                    ->required(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
-        $baseQuery = Transaction::query();  // Definisikan query dasar
-
         return $table
             ->query(function (Builder $query) {
                 if (Auth::check()) {
-                    return transaction::query()->where('user_id', Auth::id());
+                    return Transaction::query()->where('user_id', Auth::id());
                 }
-                return transaction::query();  // Selalu kembalikan instance Query Builder
+                return Transaction::query();
             })
             ->columns([
                 Tables\Columns\ImageColumn::make('category.image')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Name')
-                    ->description(fn(transaction $record): string => $record->name)
+                    ->description(fn(Transaction $record): string => $record->name)
                     ->searchable(),
                 Tables\Columns\IconColumn::make('category.pengeluaran')
                     ->label('Transaction Type')
@@ -86,7 +89,6 @@ class TransactionResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
-                // Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class transaction extends Model
 {
     protected $fillable = [
-        'id',
         'user_id',
         'name',
         'category_id',
@@ -22,10 +21,17 @@ class transaction extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     public function bank()
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'transaction_tag')->withTimestamps();
+    }
+
     protected static function booted()
     {
         static::saving(function ($transaction) {
@@ -36,7 +42,7 @@ class transaction extends Model
     public function scopePengeluaran($query)
     {
         return $query
-            ->where('user_id', Auth::id())  // Tambahkan filter user_id
+            ->where('user_id', Auth::id())
             ->whereHas('category', function ($query) {
                 $query->where('pengeluaran', true);
             });
@@ -45,7 +51,7 @@ class transaction extends Model
     public function scopePemasukan($query)
     {
         return $query
-            ->where('user_id', Auth::id())  // Tambahkan filter user_id
+            ->where('user_id', Auth::id())
             ->whereHas('category', function ($query) {
                 $query->where('pengeluaran', false);
             });

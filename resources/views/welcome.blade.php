@@ -41,9 +41,9 @@
             <h2>Welcome to DOMPETKU</h2>
             <p>Choose an option to continue</p>
             <div class="modal-buttons">
-                <a href="admin/register" class="modal-btn signup-btn">Sign
+                <a href="app/register" class="modal-btn signup-btn">Sign
                     Up</a>
-                <a href="admin/login" class="modal-btn login-btn">Login</a>
+                <a href="app/login" class="modal-btn login-btn">Login</a>
             </div>
         </div>
     </div>
