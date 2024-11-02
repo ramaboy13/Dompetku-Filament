@@ -18,7 +18,7 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder-open';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form
     {
@@ -51,7 +51,7 @@ class TransactionResource extends Resource
                     ->label('Tags')
                     ->multiple() // memungkinkan memilih banyak tag
                     ->relationship('tags', 'name') // relasi ke tags
-                    ->required(),
+                // ->required(),
             ]);
     }
 
@@ -65,8 +65,7 @@ class TransactionResource extends Resource
                 return Transaction::query();
             })
             ->columns([
-                Tables\Columns\ImageColumn::make('category.image')
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('category.image'),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Name')
                     ->description(fn(Transaction $record): string => $record->name)
@@ -87,8 +86,8 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('description')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

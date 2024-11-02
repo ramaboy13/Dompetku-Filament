@@ -158,12 +158,22 @@
     <div class="total-section">
         <table class="total-table">
             <tr>
-                <td>Subtotal:</td>
-                <td class="amount">{{ number_format($transactions->sum('amount'), 2) }}</td>
+                <td>Subtotal Pemasukan:</td>
+                <td class="amount">
+                    {{ number_format($transactions->where('category.pengeluaran', false)->sum('amount'), 2) }}
+                </td>
+            </tr>
+            <tr>
+                <td>Subtotal Pengeluaran:</td>
+                <td class="amount">
+                    {{ number_format($transactions->where('category.pengeluaran', true)->sum('amount'), 2) }}
+                </td>
             </tr>
             <tr>
                 <td><strong>Total Amount:</strong></td>
-                <td class="amount"><strong>{{ number_format($transactions->sum('amount'), 2) }}</strong></td>
+                <td class="amount">
+                    <strong>{{ number_format($transactions->sum('amount'), 2) }}</strong>
+                </td>
             </tr>
         </table>
     </div>
