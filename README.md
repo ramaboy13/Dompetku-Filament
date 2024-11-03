@@ -112,8 +112,8 @@ Kontribusi selalu welcome! Silakan buat pull request atau buka issue untuk saran
 
 Jika Anda memiliki pertanyaan atau saran, silakan hubungi:
 
--   Email: your.email@example.com
--   GitHub: [@yourusername](https://github.com/yourusername)
+-   Email: baritosurya13@gmail.com
+-   GitHub: [@ramaboy_13](https://github.com/ramaboy13)
 
 ## ⭐ Dukung Project Ini
 
