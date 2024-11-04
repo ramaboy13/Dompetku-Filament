@@ -21,7 +21,7 @@ Dompetku adalah aplikasi manajemen keuangan pribadi yang membantu Anda melacak p
 - PHP >= 8.2
 - Composer
 - Node.js & NPM
-- MySQL/MariaDB
+- MySQL/MariaDB (Opsional kalian bisa memakai database kesukaan kalian)
 
 ### Langkah Instalasi
 
@@ -63,7 +63,7 @@ DB_PASSWORD=password_database
 
 7. Install Filament (jika belum terinstall)
 ```bash
-composer require filament/filament:"^3.0-stable"
+composer require filament/filament:"^3.2" -W
 ```
 
 8. Publish Filament assets dan config
