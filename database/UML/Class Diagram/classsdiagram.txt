@@ -1,0 +1,96 @@
+@startuml
+
+    class User {
+        +id: integer
+        +name: varchar
+        +email: varchar
+        +password: varchar
+        +created_at: timestamp
+        +updated_at: timestamp
+        +register() boolean
+        +login(email: varchar, password: varchar) boolean
+    }
+
+    class Bank {
+        +id: integer
+        +name: varchar
+        +user_id: integer
+        +created_at: timestamp
+        +updated_at: timestamp
+        +addBank() boolean
+        +editBank() boolean
+        +deleteBank() boolean
+    }
+
+    class Category {
+        +id: integer
+        +name: varchar
+        +user_id: integer
+        +pengeluaran: boolean
+        +created_at: timestamp
+        +updated_at: timestamp
+        +addCategory() boolean
+        +editCategory() boolean
+        +deleteCategory() boolean
+    }
+
+    class Transaction {
+        +id: integer
+        +category_id: integer
+        +user_id: integer
+        +bank_id: integer
+        +date: date
+        +amount: integer
+        +description: varchar
+        +created_at: timestamp
+        +updated_at: timestamp
+        +addTransaction() boolean
+        +editTransaction() boolean
+        +deleteTransaction() boolean
+        +addTag(tag: Tag) void
+        +removeTag(tag: Tag) void
+    }
+
+    class Mybio {
+        +id: integer
+        +user_id: integer
+        +birth: date
+        +gender: varchar
+        +address: varchar
+        +created_at: timestamp
+        +updated_at: timestamp
+        +updateBio() boolean
+    }
+
+    class Tag {
+        +id: integer
+        +name: varchar
+        +description: varchar
+        +created_at: timestamp
+        +updated_at: timestamp
+        +createTag() boolean
+        +editTag() boolean
+        +deleteTag() boolean
+    }
+
+    class TransactionTag {
+        +id: integer
+        +transaction_id: integer
+        +tag_id: integer
+        +user_id: integer
+        +created_at: timestamp
+        +updated_at: timestamp
+        +linkTransactionTag(transaction: Transaction, tag: Tag) boolean
+        +unlinkTransactionTag(transaction: Transaction, tag: Tag) boolean
+    }
+
+    User "1" --* "1" Mybio
+    User "1" --o "0..*" Bank
+    User "1" --o "0..*" Category
+    User "1" --o "0..*" Transaction
+    Category "1" --o "0..*" Transaction
+    Bank "1" --o "0..*" Transaction
+    Transaction "0..*" --o "0..*" TransactionTag
+    Tag "0..*" --o "0..*" TransactionTag
+
+@enduml

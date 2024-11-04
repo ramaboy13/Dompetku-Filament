@@ -1,0 +1,18 @@
+@startuml
+(*) --> "User Memilih Kelola Bank"
+if "Tambah, Edit, atau Hapus Bank?" then
+    --> [Tambah] "User Mengisi Formulir Bank Baru"
+    --> "Simpan Data Bank"
+    --> "Tampilkan Pesan Bank Berhasil Ditambah"
+else
+    --> [Edit] "User Memilih Bank untuk Diedit"
+    --> "User Memperbarui Data Bank"
+    --> "Simpan Perubahan"
+    --> "Tampilkan Pesan Bank Berhasil Diperbarui"
+else
+    --> [Hapus] "User Memilih Bank untuk Dihapus"
+    --> "Hapus Data Bank"
+    --> "Tampilkan Pesan Bank Berhasil Dihapus"
+endif
+--> (*)
+@enduml

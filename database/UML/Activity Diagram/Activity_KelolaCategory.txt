@@ -1,0 +1,18 @@
+@startuml
+(*) --> "User Memilih Kelola Kategori"
+if "Tambah, Edit, atau Hapus Kategori?" then
+    --> [Tambah] "User Mengisi Formulir Kategori Baru"
+    --> "Simpan Data Kategori"
+    --> "Tampilkan Pesan Kategori Berhasil Ditambah"
+else
+    --> [Edit] "User Memilih Kategori untuk Diedit"
+    --> "User Memperbarui Data Kategori"
+    --> "Simpan Perubahan"
+    --> "Tampilkan Pesan Kategori Berhasil Diperbarui"
+else
+    --> [Hapus] "User Memilih Kategori untuk Dihapus"
+    --> "Hapus Data Kategori"
+    --> "Tampilkan Pesan Kategori Berhasil Dihapus"
+endif
+--> (*)
+@enduml

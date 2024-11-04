@@ -1,0 +1,23 @@
+@startuml
+(*) --> "User Memilih Kelola Bio"
+if "Tambah, Edit, atau Hapus Bio?" then
+    --> [Tambah] "User Mengisi Formulir Bio Baru"
+    --> "Sistem Memeriksa Apakah Bio Sudah Ada"
+    if "Bio Sudah Ada?" then
+        --> [Tidak Ada] "Simpan Data Bio Baru"
+        --> "Tampilkan Pesan Bio Berhasil Ditambah"
+    else
+        --> [Sudah Ada] "Tampilkan Pesan Bio Sudah Ada, Silakan Edit"
+    endif
+else
+    --> [Edit] "User Memilih Bio untuk Diedit"
+    --> "User Memperbarui Data Bio"
+    --> "Simpan Perubahan Bio"
+    --> "Tampilkan Pesan Bio Berhasil Diperbarui"
+else
+    --> [Hapus] "User Memilih Bio untuk Dihapus"
+    --> "Hapus Data Bio"
+    --> "Tampilkan Pesan Bio Berhasil Dihapus"
+endif
+--> (*)
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+actor Pengguna
+control Sistem
+database Database
+
+== Tambah Tag ==
+Pengguna -> Sistem : tambahTag(dataTag)
+Sistem -> Database : insertTag(dataTag)
+Database --> Sistem : return tagId
+Sistem -> Pengguna : tampilkanKonfirmasiTagDitambahkan()
+
+== Edit Tag ==
+Pengguna -> Sistem : editTag(tagId, dataTagBaru)
+Sistem -> Database : updateTag(tagId, dataTagBaru)
+Database --> Sistem : return sukses
+Sistem -> Pengguna : tampilkanKonfirmasiTagDiperbarui()
+
+== Hapus Tag ==
+Pengguna -> Sistem : hapusTag(tagId)
+Sistem -> Database : removeTag(tagId)
+Database --> Sistem : return sukses
+Sistem -> Pengguna : tampilkanKonfirmasiTagDihapus()
+@enduml

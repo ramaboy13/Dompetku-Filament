@@ -1,0 +1,23 @@
+@startuml
+actor Pengguna
+control Sistem
+database Database
+
+== Tambah Bank ==
+Pengguna -> Sistem : tambahBank(dataBank)
+Sistem -> Database : insertBank(dataBank)
+Database --> Sistem : return sukses
+Sistem -> Pengguna : tampilkanKonfirmasiBankDitambahkan()
+
+== Edit Bank ==
+Pengguna -> Sistem : editBank(bankId, dataBankBaru)
+Sistem -> Database : updateBank(bankId, dataBankBaru)
+Database --> Sistem : return sukses
+Sistem -> Pengguna : tampilkanKonfirmasiBankDiperbarui()
+
+== Hapus Bank ==
+Pengguna -> Sistem : hapusBank(bankId)
+Sistem -> Database : removeBank(bankId)
+Database --> Sistem : return sukses
+Sistem -> Pengguna : tampilkanKonfirmasiBankDihapus()
+@enduml

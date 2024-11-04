@@ -1,0 +1,14 @@
+@startuml
+(*) --> "User Mengisi Formulir Login"
+if "Validasi Data Login" then
+    --> [Valid] "Periksa Kredensial di Database"
+    if "Kredensial Benar?" then
+        --> [Benar] "Tampilkan Halaman Utama"
+    else
+        --> [Salah] "Tampilkan Pesan Kesalahan Login"
+    endif
+else
+    --> [Tidak Valid] "Tampilkan Pesan Kesalahan Validasi"
+endif
+--> (*)
+@enduml

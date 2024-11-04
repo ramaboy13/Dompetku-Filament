@@ -1,0 +1,15 @@
+@startuml
+actor Pengguna
+control Sistem
+database Database
+
+Pengguna -> Sistem : submitFormulirLogin(email, kataSandi)
+Sistem -> Database : cariUserByEmail(email)
+Database --> Sistem : return dataUser
+
+alt kataSandiCocok
+    Sistem -> Pengguna : loginBerhasil()
+else
+    Sistem -> Pengguna : loginGagal("Kredensial tidak valid")
+end
+@enduml

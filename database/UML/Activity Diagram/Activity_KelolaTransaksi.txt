@@ -1,0 +1,26 @@
+@startuml
+(*) --> "User Memilih Kelola Transaksi"
+if "Tambah, Edit, Hapus, atau Cetak Laporan?" then
+    --> [Tambah] "User Mengisi Formulir Transaksi Baru"
+    --> "Simpan Data Transaksi"
+    --> "Tampilkan Pesan Transaksi Berhasil Ditambah"
+
+else 
+    --> [Edit] "User Memilih Transaksi untuk Diedit"
+    --> "User Memperbarui Data Transaksi"
+    --> "Simpan Perubahan"
+    --> "Tampilkan Pesan Transaksi Berhasil Diperbarui"
+
+else
+    --> [Hapus] "User Memilih Transaksi untuk Dihapus"
+    --> "Hapus Data Transaksi"
+    --> "Tampilkan Pesan Transaksi Berhasil Dihapus"
+
+else
+    --> [Cetak Laporan] "User menginput bulan dan tahun"
+    --> "Sistem Menyaring Transaksi berdasarkan inputan"
+    --> "Cetak atau Tampilkan Laporan Transaksi"
+    --> "Tampilkan Pesan Laporan Berhasil Dicetak"
+endif
+--> (*)
+@enduml

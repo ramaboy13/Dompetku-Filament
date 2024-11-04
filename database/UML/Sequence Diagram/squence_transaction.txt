@@ -1,0 +1,29 @@
+@startuml
+actor Pengguna as user
+control "Transaksi Controller" as transController
+participant "Transaksi Model" as transModel
+participant "Database" as db
+
+user -> transController : Buka Riwayat Transaksi
+transController -> transModel : Ambil Semua Transaksi
+transModel -> db : Query Transaksi
+db --> transModel : Daftar Transaksi
+transModel --> transController : Kirim Daftar Transaksi
+transController -> user : Tampilkan Daftar Transaksi
+
+user -> transController : Terapkan Filter
+alt Filter Berdasarkan Amount
+    transController -> transModel : Cari Transaksi Berdasarkan Amount
+    transModel -> db : Query Berdasarkan Amount
+    db --> transModel : Daftar Transaksi Berbasis Amount
+else Filter Berdasarkan Tanggal
+    transController -> transModel : Cari Transaksi Berdasarkan Tanggal
+    transModel -> db : Query Berdasarkan Tanggal
+    db --> transModel : Daftar Transaksi Berbasis Tanggal
+else Tidak Ada Filter
+    transController -> transModel : Ambil Semua Transaksi
+    transModel -> db : Query Semua Transaksi
+    db --> transModel : Daftar Semua Transaksi
+end
+transController -> user : Tampilkan Hasil Filter
+@enduml

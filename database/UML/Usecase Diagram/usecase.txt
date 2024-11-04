@@ -1,0 +1,88 @@
+
+
+
+
+
+@startuml
+left to right direction
+
+:Pengguna: as user
+
+' Main Use Cases
+(Registrasi Akun) as register
+(Login) as login
+(Keluar) as logout
+(Kelola Profil) as profile
+(Kelola Bank) as bank
+(Kelola Kategori) as category
+(Kelola Transaksi) as transaction
+(Kelola Tag) as tag
+
+' Extended Use Cases - Profile
+(Tambah Biodata) as addBio
+(Ubah Biodata) as editBio
+(Hapus Biodata) as delBio
+
+' Extended Use Cases - Bank
+(Tambah Bank) as addBank
+(Edit Bank) as editBank
+(Hapus Bank) as deleteBank
+
+' Extended Use Cases - Category
+(Tambah Kategori) as addCategory
+(Edit Kategori) as editCategory
+(Hapus Kategori) as deleteCategory
+
+' Extended Use Cases - Transaction
+(Tambah Transaksi) as addTransaction
+(Edit Transaksi) as editTransaction
+(Hapus Transaksi) as deleteTransaction
+(Cetak Transaksi) as printTransaction
+
+
+' Extended Use Cases - Tag
+(Tambah Tag) as addTag
+(Edit Tag) as editTag
+(Hapus Tag) as deleteTag
+
+' Actor connections
+user --> register
+user --> login
+
+
+
+' Login includes
+login --> bank : <<include>>
+login --> category : <<include>>
+login --> transaction : <<include>>
+login --> tag : <<include>>
+login --> profile : <<include>>
+login --> logout : <<include>>
+
+' Profile extensions
+profile <.. addBio : <<extend>>
+profile <.. editBio : <<extend>>
+profile <.. delBio : <<extend>>
+
+' Bank extensions
+bank <.. addBank : <<extend>>
+bank <.. editBank : <<extend>>
+bank <.. deleteBank : <<extend>>
+
+' Category extensions
+category <.. addCategory : <<extend>>
+category <.. editCategory : <<extend>>
+category <.. deleteCategory : <<extend>>
+
+' Tag extensions
+tag <.. addTag : <<extend>>
+tag <.. editTag : <<extend>>
+tag <.. deleteTag : <<extend>>
+
+' Transaction extensions
+transaction <.. addTransaction : <<extend>>
+transaction <.. editTransaction : <<extend>>
+transaction <.. deleteTransaction : <<extend>>
+transaction <.. printTransaction : <<extend>>
+
+@enduml

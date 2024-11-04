@@ -1,0 +1,18 @@
+@startuml
+(*) --> "User Memilih Kelola Tags"
+if "Tambah, Edit, atau Hapus Tag?" then
+    --> [Tambah] "User Mengisi Formulir Tag Baru"
+    --> "Simpan Data Tag"
+    --> "Tampilkan Pesan Tag Berhasil Ditambah"
+else
+    --> [Edit] "User Memilih Tag untuk Diedit"
+    --> "User Memperbarui Data Tag"
+    --> "Simpan Perubahan"
+    --> "Tampilkan Pesan Tag Berhasil Diperbarui"
+else
+    --> [Hapus] "User Memilih Tag untuk Dihapus"
+    --> "Hapus Data Tag"
+    --> "Tampilkan Pesan Tag Berhasil Dihapus"
+endif
+--> (*)
+@enduml
