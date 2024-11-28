@@ -44,6 +44,10 @@
                 <a href="app/register" class="modal-btn signup-btn">Sign
                     Up</a>
                 <a href="app/login" class="modal-btn login-btn">Login</a>
+                <a href="{{ route('auth.redirect') }}" class="modal-btn google-btn">
+                    <img src="{{ asset('img/google-icon.png') }}" alt="Google Icon" class="google-icon">
+                    Continue with Google
+                </a>
             </div>
         </div>
     </div>
