@@ -18,47 +18,40 @@ Dompetku adalah aplikasi manajemen keuangan pribadi yang membantu Anda melacak p
 ## 🚀 Cara Instalasi
 
 ### Prasyarat
-
--   PHP >= 8.2
--   Composer
--   Node.js & NPM
--   MySQL/MariaDB
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL/MariaDB (Opsional kalian bisa memakai database kesukaan kalian)
 
 ### Langkah Instalasi
 
 1. Clone repository ini
-
 ```bash
 git clone https://github.com/ramaboy13/Dompetku-Filament.git
 cd Dompetku-Filament
 ```
 
 2. Install dependencies PHP
-
 ```bash
 composer install
 ```
 
 3. Install dependencies JavaScript
-
 ```bash
 npm install
 ```
 
 4. Salin file .env.example
-
 ```bash
 cp .env.example .env
 ```
 
 5. Generate application key
-
 ```bash
 php artisan key:generate
 ```
 
 6. Konfigurasi database di file .env
-
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -68,22 +61,89 @@ DB_USERNAME=username_database
 DB_PASSWORD=password_database
 ```
 
-7. Jalankan migrasi dan seeder
+7. Install Filament (jika belum terinstall)
+```bash
+composer require filament/filament:"^3.2" -W
+```
 
+8. Publish Filament assets dan config
+```bash
+php artisan filament:install --panels
+```
+
+9. Buat user admin Filament (opsional jika belum ada di seeder)
+```bash
+php artisan make:filament-user
+```
+
+10. Jalankan migrasi dan seeder
 ```bash
 php artisan migrate --seed
 ```
 
-8. Build assets
-
+11. Build assets
 ```bash
 npm run dev
 ```
 
-9. Jalankan server
-
+12. Jalankan server
 ```bash
 php artisan serve
+```
+
+### Beberapa Perintah Tambahan Laravel Filament
+
+1. Membuat Resource untuk model
+```bash
+php artisan make:filament-resource NamaModel
+```
+
+2. Membuat Relation Manager
+```bash
+php artisan make:filament-relation-manager NamaResource NamaRelasi
+```
+
+3. Membuat Widget
+```bash
+php artisan make:filament-widget NamaWidget
+```
+
+4. Membuat Page
+```bash
+php artisan make:filament-page Settings
+```
+
+5. Membuat Custom Field
+```bash
+php artisan make:filament-field ColorPicker
+```
+
+6. Generate Shield (jika menggunakan Filament Shield untuk permission)
+```bash
+php artisan shield:generate
+```
+
+7. Cache clear dan optimize (jika ada perubahan config)
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+php artisan optimize:clear
+```
+
+### Troubleshooting
+
+Jika menemui masalah dengan Filament, coba jalankan:
+```bash
+php artisan optimize:clear
+composer dump-autoload
+```
+
+Jika ada masalah dengan assets:
+```bash
+npm run build
+php artisan filament:assets
 ```
 
 ## 📖 Penggunaan
