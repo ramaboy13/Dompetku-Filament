@@ -5,7 +5,7 @@ namespace App\Filament\Resources\MybioResource\Pages;
 use App\Filament\Resources\MybioResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use App\Models\Mybio;
+use App\Models\MyBio;
 use Illuminate\Support\Facades\Auth;
 
 class ListMyBios extends ListRecords

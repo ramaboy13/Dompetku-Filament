@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaction;
+use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Carbon\Carbon;

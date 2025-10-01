@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
-use App\Models\transaction;
+use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
 
 class WidgetPengeluaranChart extends ChartWidget

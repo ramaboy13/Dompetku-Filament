@@ -4,7 +4,7 @@ namespace App\Filament\Widgets;
 
 use Carbon\Carbon;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
-use App\Models\transaction;
+use App\Models\Transaction;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Filament\Widgets\ChartWidget;

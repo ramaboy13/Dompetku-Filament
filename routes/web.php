@@ -16,4 +16,4 @@ Route::get('/', function () {
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect'])->name('auth.redirect');
 
 Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('auth.callback');
-Route::get('download', [ExportPDFController::class, 'index'])->name('download.test');
+Route::get('/export-pdf', [ExportPDFController::class, 'index'])->name('download.test');
