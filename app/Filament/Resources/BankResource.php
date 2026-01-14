@@ -50,7 +50,7 @@ class BankResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->required(),
+                    // ->required(),
             ]);
     }
 

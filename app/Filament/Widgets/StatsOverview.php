@@ -11,6 +11,9 @@ class StatsOverview extends BaseWidget
 {
     use InteractsWithPageFilters;
 
+    protected static ?string $pollingInterval = null;
+    protected static ?int $sort = 2; // Urutan setelah SaldoWidget
+
     protected function getStats(): array
     {
         $startDate = !is_null($this->filters['startDate'] ?? null)
@@ -29,10 +32,31 @@ class StatsOverview extends BaseWidget
             ->whereBetween('date_transaction', [$startDate, $endDate])
             ->sum('amount');
 
+        $selisih = $pemasukan - $pengeluaran;
+
         return [
-            Stat::make('Pemasukan', $pemasukan),
-            Stat::make('Pengeluaran', $pengeluaran),
-            Stat::make('Selisih', $pemasukan - $pengeluaran),
+            Stat::make('Pemasukan', 'Rp ' . number_format($pemasukan, 0, ',', '.'))
+                ->description('Total pemasukan periode')
+                ->descriptionIcon('heroicon-o-arrow-trending-up')
+                ->color('success')
+                ->chart([7, 2, 10, 3, 15, 4, 17]),
+
+            Stat::make('Pengeluaran', 'Rp ' . number_format($pengeluaran, 0, ',', '.'))
+                ->description('Total pengeluaran periode')
+                ->descriptionIcon('heroicon-o-arrow-trending-down')
+                ->color('danger')
+                ->chart([17, 4, 15, 3, 10, 2, 7]),
+
+            Stat::make('Selisih', 'Rp ' . number_format($selisih, 0, ',', '.'))
+                ->description('Pemasukan - Pengeluaran')
+                ->descriptionIcon('heroicon-o-scale')
+                ->color($selisih >= 0 ? 'success' : 'danger')
+                ->chart([$selisih > 0 ? 1 : -1]),
         ];
+    }
+
+    public static function canView(): bool
+    {
+        return true;
     }
 }

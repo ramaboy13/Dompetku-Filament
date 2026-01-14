@@ -14,6 +14,9 @@ class WidgetPengeluaranChart extends ChartWidget
     use InteractsWithPageFilters;
     protected static ?string $heading = 'Pengeluaran';
     protected static string $color = 'danger';
+    protected static ?int $sort = 4; // Urutan widget
+    protected static ?int $columnSpanMd = 1;
+    protected static ?int $columnSpanLg = 1;
 
     protected function getData(): array
     {

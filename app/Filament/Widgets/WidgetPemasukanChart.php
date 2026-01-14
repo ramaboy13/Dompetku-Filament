@@ -14,6 +14,9 @@ class WidgetPemasukanChart extends ChartWidget
     use InteractsWithPageFilters;
     protected static ?string $heading = 'Pemasukan';
     protected static string $color = 'success';
+    protected static ?int $sort = 3; // Urutan widget
+    protected static ?int $columnSpanMd = 1;
+    protected static ?int $columnSpanLg = 1;
 
     protected function getData(): array
     {

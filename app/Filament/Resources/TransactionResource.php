@@ -45,8 +45,8 @@ class TransactionResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
                     ->label('Struk Transactions')
-                    ->image()
-                    ->required(),
+                    ->image(),
+                    // ->required(),
                 Forms\Components\Select::make('tags') // Komponen untuk Tags
                     ->label('Tags')
                     ->multiple() // memungkinkan memilih banyak tag

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('bank');
             $table->string('norek');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

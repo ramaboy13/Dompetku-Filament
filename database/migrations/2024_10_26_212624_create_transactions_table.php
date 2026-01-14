@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->date('date_transaction');
             $table->integer('amount');
             $table->string('description')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
